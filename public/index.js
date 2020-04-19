@@ -500,21 +500,26 @@ async function populateMap()
   markers.setInfoWindows();
 }
 
-async function populateBooksAround()
-{
-  const allBooks = await apiGetBookTable();
-  const allUsers = await apiGetUserTable();
+async function populateBooksAround() {
+    const allBooks = await apiGetBookTable();
+    const allUsers = await apiGetUserTable();
 
-  var curr_lon = parseFloat((((document.cookie.split(';'))[3]).split('='))[1]);
-  var curr_lat = parseFloat((((document.cookie.split(';'))[2]).split('='))[1])
+    var splitCookie = document.cookie.split(";");
+    for (i = 0; i < 4; i++) {
 
-  /*console.log("cookie");
-  console.log(document.cookie);
+        /*These are backwards*/
+        if (splitCookie[i].includes("user_lat")) {
+            var curr_lat = parseFloat(splitCookie[i].split("=")[1]);
+        }
+        if (splitCookie[i].includes("user_lon")) {
+            var curr_lon = parseFloat(splitCookie[i].split("=")[1]);
+        }
+    }
+  /*
   console.log("lon");
   console.log(curr_lon);
   console.log("lat");
   console.log(curr_lat);*/
-
 
   //Only show 10 books alternatively allBooks.length
   for(let key = 0; key < allBooks.length; key++){
@@ -529,6 +534,11 @@ async function populateBooksAround()
     /*These are flipped on purpose, they're in the db wrong*/
     book_lon = curr_owner[0].user_lat;
     book_lat = curr_owner[0].user_lon;
+
+    console.log("Book lat");
+    console.log(book_lat);
+    console.log("Book lon");
+    console.log(book_lon);
 
     //Calculate the distance, Haversine method, accurate within .5%, then add the property
     var r = 6371000;
