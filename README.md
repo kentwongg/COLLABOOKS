@@ -1,6 +1,6 @@
-# SENG513
-/************************** SENG513 Final Project ***************************
- hosted: https://github.com/kentwongg/SENG513
+# COLLABOOKS
+/************************** COLLABOOKS Final Project ***************************
+ hosted: https://github.com/kentwongg/COLLABOOKS
  
 Members:                   
 * Jasmine Cronin
